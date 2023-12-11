@@ -10,4 +10,4 @@ build_image: Dockerfile
 
 USER=$$(whoami)
 run_image:
-	@docker run -d -it -p 5000:5000 --user=$(USER) --name=flask_app -v /home/$(USER)/python_study/flask_app/src:/home/flask/flaskapp  flask_python bash
+	@docker run -d -it -p 5000:5000 --user=$(USER) --name=flask_app  flask_python bash
