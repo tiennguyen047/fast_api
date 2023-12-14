@@ -14,7 +14,7 @@ class Item(MethodView):
     @blp.response(200, ItemSchema(many=True))
     def get(self):
         return ItemModel.query.all()
-    
+
     @jwt_required(refresh=True) # Require token to run this function
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema())
@@ -26,7 +26,7 @@ class Item(MethodView):
         except SQLAlchemyError:
             abort(500, messsage="An error occurred whilte interting the item")
         return item
-    
+
 @blp.route("/item/<int:item_id>")
 class Item_id(MethodView):
     @jwt_required()
@@ -46,7 +46,7 @@ class Item_id(MethodView):
     def get(sekf, item_id):
         item = ItemModel.query.get_or_404(item_id)
         return item
-    
+
     @jwt_required()
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema())

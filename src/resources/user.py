@@ -26,7 +26,7 @@ class UserRegister(MethodView):
         db.session.commit()
 
         return {"message": "User created successfully"}, 201
-    
+
 @blp.route("/login")
 class UserLogin(MethodView):
     @blp.arguments(UserSchema)
@@ -37,7 +37,7 @@ class UserLogin(MethodView):
             access_token = create_access_token(indentity=user.id, fresh=True)
             refresh_token = create_refresh_token(identity=user.id)
             return {"access_token": access_token, "refresh_token": refresh_token}
-        
+
         abort(401, message="Invalid username or password")
 
 @blp.route("/refresh")
@@ -63,7 +63,7 @@ class User(MethodView):
     def get(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         return user
-    
+
     def delete(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         db.session.delete(user)

@@ -30,7 +30,7 @@ def create_app(db_url=None):
     db.init_app(app)
     migrate = Migrate(app, db)
     api = Api(app)
-    
+
     """
     JWT related configuration. The following functions includes:
     1) add claims to each jwt
@@ -57,7 +57,7 @@ def create_app(db_url=None):
     @jwt.token_in_blocklist_loader
     def check_if_token_in_blocklist(jwt_header, jwt_payload):
         return jwt_payload["jti"] in BLOCK_LIST
-    
+
     @jwt.revoked_token_loader
     def revoked_token_callback(jwt_header, jwt_payload):
         return (
@@ -108,7 +108,7 @@ def create_app(db_url=None):
     @app.before_request
     def create_table():
         db.create_all()
-    
+
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
     api.register_blueprint(TagBlueprint)

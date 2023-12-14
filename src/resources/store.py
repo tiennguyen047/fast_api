@@ -15,7 +15,7 @@ class Item(MethodView):
     @blp.response(200, StoreSchema(many=True))
     def get(self):
         return StoreModel.query.all()
-    
+
     @blp.arguments(StoreSchema)
     @blp.response(201, StoreSchema())
     def post(self, store_data):
@@ -37,18 +37,18 @@ class Store_id(MethodView):
         db.session.commit()
         return {"message": "Store deleted"}
 
-    
+
     @blp.response(201, StoreSchema())
     def get(self, store_id):
         store = StoreModel.query.get_or_404(store_id)
         return store
-    
+
     @blp.arguments(StoreUpdateSchema)
     @blp.response(200, StoreSchema())
     def put(self, store_data, store_id):
         store = StoreModel.query.get(store_id)
         if store:
-            store.name = store_data.name 
+            store.name = store_data.name
         else:
             store = StoreModel(id=store_id, **store_data)
         db.session.add(store)

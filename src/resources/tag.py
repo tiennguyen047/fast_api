@@ -20,7 +20,7 @@ class TagInStore(MethodView):
         """
         store = StoreModel.query.get_or_404(store_id)
         return store.tags.all()
-    
+
     @blp.arguments(TagSchema())
     @blp.response(201, TagSchema())
     def post(self, tag_data, store_id):
@@ -45,7 +45,7 @@ class Tag(MethodView):
         """
         tag = TagModel.query.get_or_404(tag_id)
         return tag
-    
+
     @blp.response(200, description="Deletes tag if no item is tagged with it",
                 example={"message": "Tag deleted"})
     @blp.alt_response(404, description="Tag not found")
@@ -59,7 +59,7 @@ class Tag(MethodView):
         abort(400, message="Could not delete tag. Make sure tag is not associated with any items, then try again")
 
 
-    
+
 @blp.route("/item/<int:item_id>/tag/<int:tag_id>")
 class LinkTagToItem(MethodView):
     @blp.response(200, TagSchema)
